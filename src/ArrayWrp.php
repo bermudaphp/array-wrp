@@ -2,8 +2,8 @@
 
 namespace Bermuda\StdLib;
 
-use ReturnTypeWillChange;
 use Traversable;
+use ReturnTypeWillChange;
 
 class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countable
 {
