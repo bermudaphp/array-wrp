@@ -10,19 +10,10 @@ class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countabl
 {
     protected array $data = [];
     
-    public function __construct(iterable $data = []) {
+    public function __construct(iterable|object $data = []) {
         if (is_array($data)) $this->data = $data;
+        else if (is_object($data)) $this->data = $data instanceof Arrayable ? $data->toArray() : get_object_vars($data);
         else foreach ($data as $offset => $datum) $this->data[$offset] = $datum;
-    }
-
-    public static function wrap(iterable $data = []): static
-    {
-        return new static($data);
-    }
-
-    public static function fromObjectVars(object $obj): static
-    {
-        return new static(get_object_vars($obj));
     }
 
     public static function range(int $start = 1, int $end = 10, int $step = 1): static
