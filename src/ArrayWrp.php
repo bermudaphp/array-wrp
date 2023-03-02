@@ -2,7 +2,6 @@
 
 namespace Bermuda\StdLib;
 
-use Bermuda\Arrayable;
 use ReturnTypeWillChange;
 use Traversable;
 
