@@ -16,28 +16,19 @@ class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countabl
         else foreach ($data as $offset => $datum) $this->data[$offset] = $datum;
     }
 
-    public static function range(int $start = 1, int $end = 10, int $step = 1): static
+    public static function fromKeys(iterable|object $data): static
     {
-        return new static(range($start, $end, $step));
-    }
-
-    public static function fromKeys(iterable $data): static
-    {
+        if (is_object($data)) $data = $data instanceof Arrayable ? $data->toArray() : get_object_vars($data);
         $static = new static;
-        foreach ($data as $k => $v) {
-            $static->data[] = $k;
-        }
-
+        foreach ($data as $k => $v) $static->data[] = $k;
         return $static;
     }
 
-    public static function fromValues(iterable $data): static
+    public static function fromValues(iterable|object $data): static
     {
+        if (is_object($data)) $data = $data instanceof Arrayable ? $data->toArray() : get_object_vars($data);
         $static = new static;
-        foreach ($data as $v) {
-            $static->data[] = $v;
-        }
-
+        foreach ($data as $v) $static->data[] = $v;
         return $static;
     }
 
@@ -53,7 +44,7 @@ class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countabl
 
     public function toImmutable(): ArrayWrapperImmutable
     {
-        return new ArrayWrapperImmutable($this->data);
+        return new ArrayWrpIml($this->data);
     }
 
     public function reject(callable $callback, bool $recursive = false): static
