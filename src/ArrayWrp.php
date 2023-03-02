@@ -6,7 +6,7 @@ use Bermuda\Arrayable;
 use ReturnTypeWillChange;
 use Traversable;
 
-class ArrayWrapper implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countable
+class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countable
 {
     protected array $data = [];
     
