@@ -1,0 +1,13 @@
+{
+    "name": "bermudaphp/array-wrp",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bermuda\\Stdlib\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0|^8.1",
+        "bermudaphp/arrayable": "^1.0"
+    }
+}
