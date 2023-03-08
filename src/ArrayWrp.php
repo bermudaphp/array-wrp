@@ -1,6 +1,6 @@
 <?php
 
-namespace Bermuda\StdLib;
+namespace Bermuda\Stdlib;
 
 use Traversable;
 use ReturnTypeWillChange;
