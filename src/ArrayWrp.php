@@ -41,11 +41,6 @@ class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countabl
         return empty($this->data);
     }
 
-    public function toImmutable(): ArrayWrapperImmutable
-    {
-        return new ArrayWrpIml($this->data);
-    }
-
     public function reject(callable $callback, bool $recursive = false): static
     {
         $data = [];
@@ -158,7 +153,17 @@ class ArrayWrp implements \ArrayAccess, Arrayable, \IteratorAggregate, \Countabl
         return array_key_exists($offset, $this->data);
     }
 
-    public function each(callable $callback): bool
+    public function each(callable $callback): ArrayWrp
+    {
+        $static = new static;
+        foreach ($this->data as $k => $value) {
+            $static->data[$k] = $callback($value, $k);
+        }
+
+        return $static;
+    }
+    
+    public function fit(callable $callback): bool
     {
         $stop = false;
         foreach ($this->data as $k => $value) {
